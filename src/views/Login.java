@@ -6,7 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import jdbc.controller.UsuarioController;
+import jdbc.modelo.Usuario;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -80,9 +85,17 @@ public class Login extends JFrame {
 		btnLogin.setIcon(new ImageIcon(Login.class.getResource("/imagenes/perfil-del-usuario.png")));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuUsuario usuario = new MenuUsuario();
-				usuario.setVisible(true);
-				dispose();
+				Usuario user = new Usuario(txtUsuario.getText(), txtContrasena.getText());				
+				Boolean verificar = new UsuarioController().verificarUsuario(user);
+				
+				if(verificar) {
+					MenuUsuario usuario = new MenuUsuario();
+					usuario.setVisible(true);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(btnLogin, "Usuario y/o Contraseña inválidos");
+				}
+				
 			}
 		});
 		btnLogin.setBounds(409, 322, 103, 33);
