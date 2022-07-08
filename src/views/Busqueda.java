@@ -310,17 +310,18 @@ public class Busqueda extends JFrame {
 	        }
 	        
 	        Optional<Object> optional = Optional.ofNullable(modeloTablaReservas.getValueAt(tbReservas.getSelectedRow(), tbReservas.getSelectedColumn()));
-	                if(optional.isPresent()) {	  
-	                	Integer id = Integer.valueOf(modeloTablaReservas.getValueAt(tbReservas.getSelectedRow(), 0).toString());			                
+	                
+	        if(optional.isPresent()) {	  
+	        	Integer id = Integer.valueOf(modeloTablaReservas.getValueAt(tbReservas.getSelectedRow(), 0).toString());			                
 	                    
-	                    int filasModificadas = this.reservaController.eliminarReserva(id);
+	            int filasModificadas = this.reservaController.eliminarReserva(id);
 	                    
-	                    if(filasModificadas > 0) {
-	                    	JOptionPane.showMessageDialog(this, String.format("%d item modificado con éxito!", filasModificadas));
-	                    	limpiarModeloTabla(modeloTablaReservas);
-	                    } else {
-	                    	JOptionPane.showMessageDialog(this, String.format("%d item modificado, Se ocasionó un error", filasModificadas));
-	                    }
+	            if(filasModificadas > 0) {
+	                JOptionPane.showMessageDialog(this, String.format("%d item modificado con éxito!", filasModificadas));
+	                limpiarModeloTabla(modeloTablaReservas);
+	            } else {
+	            	JOptionPane.showMessageDialog(this, String.format("%d item modificado, Se ocasionó un error", filasModificadas));
+	            }
 	                    
 	                } else {
 	                    JOptionPane.showMessageDialog(this, "Por favor, elije un item");
